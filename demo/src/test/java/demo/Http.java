@@ -23,7 +23,7 @@ public class Http {
 
     @Test
     public void test2() {
-        Object o[] = {1, 2, 3};
+        Object[] o = {1, 2, 3};
         this.getData(o);
         System.out.println(o.length);
     }
@@ -31,20 +31,18 @@ public class Http {
     @Test
     public void test3() {
 
-        Map data = new HashMap();
-
-        Map keyword1 = new HashMap();
+        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> keyword1 = new HashMap<>();
         keyword1.put("value", "98gadf");
         data.put("keyword1", keyword1);
 
-        Map keyword2 = new HashMap();
+        Map<String, Object> keyword2 = new HashMap<>();
         keyword1.put("value", "9fghfsgdf");
-        data.put("keyword2", keyword1);
+        data.put("keyword2", keyword2);
 
 
         Response response = HttpClient.builder()
                 .setUrl("http://local.verystar.net/data/")
-                .addPathVariable("post")
                 .addHeader("User-Agent", "Chrome")
                 .addHeader("Content-Type", "application/json")
                 .addPostData("username", "jinxing.liu")

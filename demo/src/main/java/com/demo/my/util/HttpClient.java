@@ -43,19 +43,19 @@ public class HttpClient {
     private String url;
 
     // 路径中请求参数
-    private Map<String, Object> query = new HashMap<String, Object>();
+    private Map<String, Object> query = new HashMap<>();
 
     // 请求方法
     private String method = Method.GET;
 
     // 请求数据 post
-    private Map data = new HashMap();
+    private Map<String, Object> data = new HashMap<>();
 
     // Cookies 请求参数
     private String cookies = "";
 
     // 请求header头信息
-    private Map<String, String> headers = new HashMap<String, String>();
+    private Map<String, String> headers = new HashMap<>();
 
     // 返回结果的编码
     private String encode = Encode.UTF8;
@@ -86,17 +86,10 @@ public class HttpClient {
 
     }
 
+    @org.jetbrains.annotations.NotNull
+    @org.jetbrains.annotations.Contract(" -> new")
     public static HttpClient builder() {
         return new HttpClient();
-    }
-
-    public HttpClient build() {
-        return this;
-    }
-
-    private HttpURLConnection getConnection() {
-        this.openConnection();
-        return this.connection;
     }
 
     private void openConnection() {
@@ -246,29 +239,22 @@ public class HttpClient {
     }
 
     private String toPostDataString() {
-        if (data.size() < 1)
+        if (data.size() < 1) {
             return "";
+        }
+
         String postDataString = null;
-
         String contentType = headers.get("Content-Type");
-
         if (contentType != null && contentType.contains("form")) {
             postDataString = toQueryString(this.data);
-            postDataString = postDataString.substring(1, postDataString.length());
-        }
-//        else if (ContentType.contains("json"))
-        else {
+            postDataString = postDataString.substring(1);
+        } else {
             postDataString = toJSONString(this.data);
         }
 
         return postDataString;
     }
 
-    /**
-     * 查询参数转为字符串
-     *
-     * @return
-     */
     private String toQueryString(Map<String, Object> query) {
         StringBuilder sb = new StringBuilder();
         if (!query.isEmpty()) {
@@ -287,7 +273,7 @@ public class HttpClient {
     /**
      * 查询参数转为字符串
      *
-     * @return
+     * @return 字符串
      */
     private String toQueryString() {
         return this.toQueryString(this.query);
@@ -296,26 +282,16 @@ public class HttpClient {
     /**
      * 添加一条路径参数
      *
-     * @param var 路径参数
-     * @return
-     */
-    public HttpClient addPathVariable(Object var) {
-        this.url += "/" + var;
-        return this;
-    }
-
-    /**
-     * 添加一条路径参数
-     *
      * @param key   键
      * @param value 值
-     * @return
+     * @return 自己
      */
     public HttpClient addQuery(String key, Object value) {
         if (key == null || value == null)
             throw new IllegalArgumentException("key或value不可为空");
 
         query.put(key, value);
+
         return this;
     }
 
@@ -386,7 +362,6 @@ public class HttpClient {
             while (entries.hasNext()) {
                 Map.Entry entry = (Map.Entry) entries.next();
                 sb.append("\"").append(entry.getKey()).append("\":");
-
                 Object value = entry.getValue();
                 parseValue(sb, value);
 
@@ -430,10 +405,12 @@ public class HttpClient {
     }
 
     public HttpClient setUrl(String url) {
-        if (url == null || "".equals(url))
+        if (url == null || "".equals(url)) {
             throw new IllegalArgumentException("url不能为空或空串");
+        }
 
         this.url = url;
+
         return this;
     }
 
@@ -461,11 +438,11 @@ public class HttpClient {
         return this;
     }
 
-    public Map getPostData() {
+    public Map<String, Object> getPostData() {
         return data;
     }
 
-    public HttpClient setPostData(Map postData) {
+    public HttpClient setPostData(Map<String, Object> postData) {
         if (postData == null)
             throw new IllegalArgumentException("data不能为空");
 
@@ -478,10 +455,12 @@ public class HttpClient {
     }
 
     public HttpClient setCookies(String cookies) {
-        if (cookies == null || "".equals(cookies))
+        if (cookies == null || "".equals(cookies)) {
             throw new IllegalArgumentException("cookie不能为空");
+        }
 
         this.cookies = cookies;
+
         return this;
     }
 
@@ -490,10 +469,12 @@ public class HttpClient {
     }
 
     public HttpClient setHeaders(Map<String, String> headers) {
-        if (headers == null)
+        if (headers == null) {
             throw new IllegalArgumentException("headers不能为空");
+        }
 
         this.headers = headers;
+
         return this;
     }
 
@@ -502,10 +483,12 @@ public class HttpClient {
     }
 
     public HttpClient setEncode(String encode) {
-        if (encode == null || "".equals(encode))
+        if (encode == null || "".equals(encode)) {
             throw new IllegalArgumentException("encode不能为空");
+        }
 
         this.encode = encode;
+
         return this;
     }
 
