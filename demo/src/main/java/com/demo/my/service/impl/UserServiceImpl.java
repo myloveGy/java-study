@@ -14,6 +14,10 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "userDao")
     private UserDao userDao;
 
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     @Override
     public void save() {
         this.userDao.save();

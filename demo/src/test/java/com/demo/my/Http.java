@@ -1,4 +1,4 @@
-package demo;
+package com.demo.my;
 
 import com.demo.my.util.HttpClient;
 import com.demo.my.util.Response;
