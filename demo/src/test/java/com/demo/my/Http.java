@@ -33,11 +33,11 @@ public class Http {
 
         Map<String, Object> data = new HashMap<>();
         Map<String, Object> keyword1 = new HashMap<>();
-        keyword1.put("value", "98gadf");
+        keyword1.put("value", "我的测试");
         data.put("keyword1", keyword1);
 
         Map<String, Object> keyword2 = new HashMap<>();
-        keyword1.put("value", "9fghfsgdf");
+        keyword2.put("value", "还是测试");
         data.put("keyword2", keyword2);
 
 
@@ -98,13 +98,13 @@ public class Http {
             e.printStackTrace();
         } finally {
             try {
-               if (out != null) {
-                   out.close();
-               }
+                if (out != null) {
+                    out.close();
+                }
 
-               if (in != null) {
-                   in.close();
-               }
+                if (in != null) {
+                    in.close();
+                }
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
