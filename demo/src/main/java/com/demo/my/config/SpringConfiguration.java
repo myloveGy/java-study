@@ -11,7 +11,12 @@ import org.springframework.context.annotation.Import;
 // <context:property-placeholder location="classpath:jdbc.properties"/>
 //@PropertySource("classpath:jdbc.properties")
 // <import resource=""/>
-@Import({DataSourceConfiguration.class})
+@Import({
+        DataSourceConfiguration.class,
+        RedisConfiguration.class,
+        RedisConnectionConfiguration.class,
+        RedisTemplateConfiguration.class,
+})
 public class SpringConfiguration {
 
 
