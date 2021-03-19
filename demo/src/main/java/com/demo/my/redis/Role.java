@@ -2,7 +2,9 @@ package com.demo.my.redis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
 
     private Long id;
 

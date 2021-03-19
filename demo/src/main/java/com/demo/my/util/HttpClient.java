@@ -172,7 +172,7 @@ public class HttpClient {
         if (length > 1) {
             Object param = params[1];
             if (param instanceof Map) {
-                client.setQuery((Map) param);
+                client.setQuery((Map<String, Object>) param);
             }
         }
 
@@ -180,7 +180,7 @@ public class HttpClient {
         if (length > 2) {
             Object param = params[2];
             if (param instanceof Map) {
-                client.setPostData((Map) param);
+                client.setPostData((Map<String, Object>) param);
             }
         }
 
@@ -188,7 +188,7 @@ public class HttpClient {
         if (length > 3) {
             Object param = params[3];
             if (param instanceof Map) {
-                client.setHeaders((Map) param);
+                client.setHeaders((Map<String, String>) param);
             }
         }
 
@@ -204,11 +204,10 @@ public class HttpClient {
     /**
      * 设置请求属性
      *
-     * @param conn
-     * @throws IOException
+     * @param conn 连接
+     * @throws IOException 抛出错误
      */
     private void setRequestProperties(HttpURLConnection conn) throws IOException {
-
         conn.setDoInput(doInput);
         conn.setDoOutput(doOutput);
         conn.setUseCaches(useCaches);
@@ -255,19 +254,19 @@ public class HttpClient {
         return postDataString;
     }
 
-    private String toQueryString(Map<String, Object> query) {
-        StringBuilder sb = new StringBuilder();
+    public String toQueryString(Map<String, Object> query) {
+        StringBuilder builder = new StringBuilder();
         if (!query.isEmpty()) {
-            if (url.contains("?"))
-                sb.append("&");
-            else
-                sb.append("?");
+            String str = url.contains("?") ? "&" : "?";
+            builder.append(str);
+            for (Map.Entry<String, Object> entry : query.entrySet()) {
+                builder.append(entry.getKey()).append("=").append(entry.getValue().toString()).append("&");
+            }
 
-            for (Map.Entry entry : query.entrySet())
-                sb.append(entry.getKey().toString() + "=" + entry.getValue().toString() + "&");
-            sb.delete(sb.length() - 1, sb.length());
+            builder.delete(builder.length() - 1, builder.length());
         }
-        return sb.toString();
+
+        return builder.toString();
     }
 
     /**

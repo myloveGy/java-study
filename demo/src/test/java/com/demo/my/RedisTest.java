@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import redis.clients.jedis.Jedis;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
 public class RedisTest {
 
     @Resource(name = "redisTemplate")
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, Role> redisTemplate;
 
     @Test
     public void redisClient() {
@@ -30,20 +31,27 @@ public class RedisTest {
 
     @Test
     public void redis() {
-        System.out.println(redisTemplate);
         Role role = new Role();
         role.setRoleName("管理员");
         role.setId(1L);
         role.setCreatedAt(DateTime.format());
-        redisTemplate.boundValueOps("name").set(role);
+        redisTemplate.opsForValue().set("name:1", role);
 
-        Role role2 = (Role) redisTemplate.opsForValue().get("name");
-        if (role2 != null) {
-            Assert.assertEquals("管理员", role2.getRoleName());
-            role2.setId(2L);
-            role2.setRoleName("jinxing.liu");
-            role2.setCreatedAt(DateTime.format());
-            redisTemplate.opsForValue().set("name:2", role2);
+        Role role2 = new Role();
+        role2.setId(2L);
+        role2.setRoleName("超级管理员");
+        role2.setCreatedAt(DateTime.format());
+        redisTemplate.opsForValue().set("name:2", role2);
+    }
+
+    @Test
+    public void get() {
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Role.class));
+        Role role = redisTemplate.opsForValue().get("name:2");
+        System.out.println(role);
+        if (role != null) {
+            System.out.println(role.getRoleName());
+            System.out.println(role.getCreatedAt());
         }
     }
 }
