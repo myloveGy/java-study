@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @ContextConfiguration(classes = {SpringConfiguration.class})
 public class RedisTest {
 
-    @Resource(name = "redisTemplate")
+    @Resource
     private RedisTemplate<String, Role> redisTemplate;
 
     @Test
