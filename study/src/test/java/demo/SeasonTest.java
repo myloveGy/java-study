@@ -21,6 +21,6 @@ public class SeasonTest {
             System.out.println(value);
         }
 
-        System.out.println(SeasonEnum.valueOf("WINTER").getDescription());
+        System.out.println(SeasonEnum.valueOf("WINTER").getName());
     }
 }

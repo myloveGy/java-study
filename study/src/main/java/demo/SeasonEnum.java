@@ -1,6 +1,10 @@
 package demo;
 
-enum SeasonEnum {
+interface Name {
+    String getName();
+}
+
+enum SeasonEnum implements Name {
 
     SPRING("春天", "春天好啊"),
     SUMMER("夏天", "夏天好热"),
@@ -11,7 +15,7 @@ enum SeasonEnum {
 
     private final String description;
 
-    private SeasonEnum(String name, String description) {
+    SeasonEnum(String name, String description) {
         this.name = name;
         this.description = description;
     }
