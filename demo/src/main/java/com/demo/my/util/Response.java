@@ -1,7 +1,5 @@
 package com.demo.my.util;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.security.Permission;
@@ -163,7 +161,7 @@ public class Response {
         return connection.getHeaderField(name);
     }
 
-    public Map<String,List<String>> getHeaderFields() {
+    public Map<String, List<String>> getHeaderFields() {
         return connection.getHeaderFields();
     }
 

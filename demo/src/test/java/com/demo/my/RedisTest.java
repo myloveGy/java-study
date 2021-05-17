@@ -3,7 +3,6 @@ package com.demo.my;
 import com.demo.my.config.SpringConfiguration;
 import com.demo.my.redis.Role;
 import com.demo.my.util.DateTime;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.data.redis.core.RedisTemplate;
