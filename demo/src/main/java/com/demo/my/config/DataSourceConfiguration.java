@@ -28,12 +28,8 @@ public class DataSourceConfiguration {
     @Bean("dataSource")
     public DataSource getDataSource() throws Exception {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
-
-        dataSource.setDriverClass("com.mysql.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/java-study");
-        System.out.println(driver.equals("com.mysql.jdbc.Driver"));
-        System.out.println(url.equals("jdbc:mysql://localhost:3306/java-study"));
-        System.out.println(url);
+        dataSource.setDriverClass(driver);
+        dataSource.setJdbcUrl(url);
         dataSource.setUser(username);
         dataSource.setPassword(password);
         return dataSource;
