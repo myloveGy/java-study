@@ -2,7 +2,6 @@ package features;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,7 @@ public class Stream2Test {
         Stream.iterate(0, x -> x + 1).limit(10).forEach(System.out::println);
 
         // java9 方法重载
-        Stream.iterate(0, x -> x < 100, x -> x  + 1).forEach(System.out::println);
+        Stream.iterate(0, x -> x < 100, x -> x + 1).forEach(System.out::println);
     }
 
     @Test
