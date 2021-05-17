@@ -2,14 +2,34 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <context:component-scan base-package="com.demo.my"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <bean id="userDao" class="com.demo.my.dao.impl.UserDaoImpl"/>
     <bean id="userService" class="com.demo.my.service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
+
+    <!--目标对象-->
+    <bean id="target" class="com.demo.my.aop.Target"/>
+    <!--切面对象-->
+    <bean id="myAspect" class="com.demo.my.aop.MyAspect"/>
+
+    <!--配置织入: 高数spring框架 哪些方法(切点)需要进行哪些增强(前置、后置...)-->
+    <aop:config>
+        <!--声明切面-->
+        <aop:aspect ref="myAspect">
+            <!--切面: 切点+通知-->
+            <aop:before method="before" pointcut="execution(public void  com.demo.my.aop.Target.run(..))"/>
+            <aop:after-returning method="after" pointcut="execution(* com.demo.my.aop.Target.run(..))"/>
+
+            <aop:pointcut id="myPointcut" expression="execution(* com.demo.my.aop.Target.save())"/>
+            <aop:around method="around" pointcut-ref="myPointcut"/>
+        </aop:aspect>
+    </aop:config>
 
     <!-- Redis连接池的配置 -->
     <context:property-placeholder location="classpath:redis.properties"/>
