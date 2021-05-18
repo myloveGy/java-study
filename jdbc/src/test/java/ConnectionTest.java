@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -55,6 +56,26 @@ public class ConnectionTest {
 
         // 2、获取连接
         Connection root = DriverManager.getConnection("jdbc:mysql://localhost:3306/java-study", "root", "123456");
+        System.out.println(root);
+    }
+
+    @Test
+    public void testConnection5() throws Exception {
+        // 1、读取配置文件
+        InputStream inputStream = ConnectionTest.class.getClassLoader().getResourceAsStream("jdbc.properties");
+        Properties properties = new Properties();
+        properties.load(inputStream);
+
+        System.out.println(properties.getProperty("driver"));
+        System.out.println(properties.getProperty("url"));
+        System.out.println(properties.getProperty("username"));
+        System.out.println(properties.getProperty("password"));
+
+        // 2、获取Driver实现类：使用反射
+        Class.forName(properties.getProperty("driver"));
+
+        // 3、获取连接
+        Connection root = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"), properties.getProperty("password"));
         System.out.println(root);
     }
 }
