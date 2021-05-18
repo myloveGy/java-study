@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
         RedisConfiguration.class,
         RedisConnectionConfiguration.class,
         RedisTemplateConfiguration.class,
+        JdbcTemplateConfiguration.class,
 })
 public class SpringConfiguration {
 
