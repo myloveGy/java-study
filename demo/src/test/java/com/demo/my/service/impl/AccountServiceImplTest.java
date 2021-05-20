@@ -19,6 +19,6 @@ public class AccountServiceImplTest {
     @Test
     public void transfer() throws Exception {
         boolean test = accountService.transfer("test", "username", 100L);
-        assertEquals(true, test);
+        assertTrue(test);
     }
 }
