@@ -54,7 +54,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void testQueryOne() {
-        Account account = jdbcTemplate.queryForObject("SELECT * FROM `account` WHERE `id` = ?", new BeanPropertyRowMapper<>(Account.class), 100);
+        Account account = jdbcTemplate.queryForObject("SELECT * FROM `account` WHERE `id` = ?", new BeanPropertyRowMapper<>(Account.class), 1);
         System.out.println(account);
     }
 
