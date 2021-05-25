@@ -15,7 +15,7 @@
         <!--servlet-name给Servlet程序起一个别名-->
         <servlet-name>firstServlet</servlet-name>
         <!--servlet-class是Servlet程序的全类名-->
-        <servlet-class>com.example.web.FirstServlet</servlet-class>
+        <servlet-class>com.example.web.controller.FirstServlet</servlet-class>
         <!--init-param配置初始化init的参数-->
         <init-param>
             <!--参数名称-->
@@ -27,7 +27,7 @@
     
     <servlet>
         <servlet-name>ContextServlet</servlet-name>
-        <servlet-class>com.example.web.ContextServlet</servlet-class>
+        <servlet-class>com.example.web.controller.ContextServlet</servlet-class>
     </servlet>
     
     <!--servlet-mapping标签给Servlet程序配置访问地址-->
