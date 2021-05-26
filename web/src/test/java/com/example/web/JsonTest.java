@@ -24,10 +24,11 @@ public class JsonTest {
         // json encode
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
-        assertEquals("{\"id\":1,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"createdAt\":\"2021-01-02 15:50:59\"}", userJson);
+        System.out.println(userJson);
+        assertEquals("{\"id\":1,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"created_at\":\"2021-01-02 15:50:59\"}", userJson);
 
         // json decode
-        User u = gson.fromJson("{\"id\":2,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"createdAt\":\"2021-01-02 15:50:59\"}", User.class);
+        User u = gson.fromJson("{\"id\":2,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"created_at\":\"2021-01-02 15:50:59\"}", User.class);
         System.out.println(u);
 
         List<User> list = new ArrayList<>();
@@ -39,7 +40,7 @@ public class JsonTest {
 
         // 解析
        List<User> jsonList = gson.fromJson(
-                "[{\"id\":1,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"createdAt\":\"2021-01-02 15:50:59\"},{\"id\":2,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"createdAt\":\"2021-01-02 15:50:59\"}]",
+                "[{\"id\":1,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"created_at\":\"2021-01-02 15:50:59\"},{\"id\":2,\"username\":\"jinxing.liu\",\"password\":\"123456\",\"email\":\"jinxing.liu@qq.com\",\"status\":0,\"created_at\":\"2021-01-02 15:50:59\"}]",
                 new TypeToken<List<User>>(){}.getType()
       );
 

@@ -1,6 +1,6 @@
 package com.example.web.pojo;
 
-import java.time.LocalDateTime;
+import com.google.gson.annotations.SerializedName;
 
 public class User {
     public final static int USER_STATUS = 1;
@@ -10,6 +10,8 @@ public class User {
     private String password;
     private String email;
     private int status;
+
+    @SerializedName("created_at")
     private String createdAt;
 
     public Integer getId() {
