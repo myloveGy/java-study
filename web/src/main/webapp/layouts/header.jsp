@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: jinxing
   Date: 2021/5/25
@@ -15,31 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Java Study WEB JSP</title>
     <style>
-        body, * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .header ul {
-            list-style: none;
-        }
-
-        .header ul li {
-            display: inline-block;
-        }
-
-        .header ul li a {
-            padding: 5px;
-            text-decoration: none;
-            display: block;
-            line-height: 40px;
-            color: #777;
-        }
-
-        .header ul li a:hover {
-            color: #333;
-        }
-
         .header {
             background-color: #f8f8f8;
             border-color: #e7e7e7;
@@ -47,8 +23,15 @@
             border-bottom: 1px solid #e7e7e7;
         }
 
+        .header > ul.nav, .header > ul.nav > li, .header > ul.nav > li > a {
+            height: 50px;
+        }
 
-        #content, .header ul {
+        .header > ul.nav > li > a {
+            line-height: 30px;
+        }
+
+        #content, .header > ul.nav {
             width: 1170px;
             margin: 0 auto;
         }
@@ -57,16 +40,62 @@
             margin-top: 24px;
         }
     </style>
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/bootstrap.min.css"
+          crossorigin="anonymous">
 </head>
 <body>
 <div class="header">
-    <ul>
-        <li><a href="/web">首页</a></li>
-        <li><a href="/web/hello-servlet">Hello Servlet</a></li>
-        <li><a href="/web/first-servlet">First Servlet</a></li>
-        <li><a href="/web/test-servlet">Test Servlet</a></li>
-        <li><a href="/web/user/login.jsp">Login</a></li>
-        <li><a href="/web/user/register.jsp">Register</a></li>
+    <%
+        class Menu {
+            public String url;
+            public String name;
+
+            public Menu(String url, String name) {
+                this.url = url;
+                this.name = name;
+            }
+        }
+
+        List<Menu> menus = new ArrayList<>();
+
+        menus.add(new Menu("/web/user/login.jsp", "Login"));
+        menus.add(new Menu("/web/user/register.jsp", "Register"));
+        menus.add(new Menu("/web/hello.jsp", "Hello"));
+        menus.add(new Menu("/web/upload.jsp", "Upload"));
+        menus.add(new Menu("/web/download", "文件下载"));
+        menus.add(new Menu("/web/cookie", "Cookie"));
+        menus.add(new Menu("/web/cookie.jsp", "查看Cookie"));
+        menus.add(new Menu("/web/session.jsp", "查看Session"));
+        menus.add(new Menu("/web/admin/index.jsp", "管理员信息"));
+
+        // servlet
+        List<Menu> servlet = new ArrayList<>();
+        servlet.add(new Menu("/web/hello-servlet", "Hello Servlet"));
+        servlet.add(new Menu("/web/context-servlet", "Context Servlet"));
+        servlet.add(new Menu("/web/first-servlet", "First Servlet"));
+        servlet.add(new Menu("/web/test-servlet", "Test Servlet"));
+
+    %>
+    <ul class="nav nav-pills">
+        <li>
+            <a href="/web">首页</a>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                servlet <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <% for (Menu m : servlet) { %>
+                <li><a href="<%=m.url%>"><%=m.name%>
+                </a></li>
+                <% } %>
+            </ul>
+        </li>
+        <% for (Menu m : menus) { %>
+        <li><a href="<%=m.url%>"><%=m.name%>
+        </a></li>
+        <% } %>
     </ul>
 </div>
 

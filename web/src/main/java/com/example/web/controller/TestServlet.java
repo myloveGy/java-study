@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "TestServlet", value = "/test-servlet")
 public class TestServlet extends HttpServlet {
@@ -13,6 +14,8 @@ public class TestServlet extends HttpServlet {
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         System.out.println(servletConfig.getServletName());
+        List<String> list = List.of("123", "456", "780");
+        list.forEach(System.out::println);
     }
 
     @Override

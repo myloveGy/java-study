@@ -13,7 +13,7 @@
     <!--servlet标签给Tomcat配置Servlet程序-->
     <servlet>
         <!--servlet-name给Servlet程序起一个别名-->
-        <servlet-name>firstServlet</servlet-name>
+        <servlet-name>FirstServlet</servlet-name>
         <!--servlet-class是Servlet程序的全类名-->
         <servlet-class>com.example.web.controller.FirstServlet</servlet-class>
         <!--init-param配置初始化init的参数-->
@@ -33,7 +33,7 @@
     <!--servlet-mapping标签给Servlet程序配置访问地址-->
     <servlet-mapping>
         <!--servlet-name标签的作用是告诉服务器，我当前配置的地址给那个Servlet程序-->
-        <servlet-name>firstServlet</servlet-name>
+        <servlet-name>FirstServlet</servlet-name>
         <url-pattern>/first-servlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -41,4 +41,24 @@
         <servlet-name>ContextServlet</servlet-name>
         <url-pattern>/context-servlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>captchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>captchaServlet</servlet-name>
+        <url-pattern>/captcha.jpg</url-pattern>
+    </servlet-mapping>
+    
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.example.web.filter.UserFilter</filter-class>
+    </filter>
+    
+    <!--    拦截路径-->
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
 </web-app>
