@@ -2,12 +2,15 @@
 <%@ include file="layouts/header.jsp" %>
 <div id="content">
     <table class="table table-bordered table-hover">
+        <thead>
         <tr>
             <th>Name</th>
             <th>Value</th>
             <th>Domain</th>
             <th>Path</th>
         </tr>
+        </thead>
+        <tbody>
         <%
             Cookie[] cookies = request.getCookies();
             for (int i = 0; i < cookies.length; i++) {
@@ -29,7 +32,7 @@
         <%
             }
         %>
-
+        </tbody>
     </table>
 </div>
 <%@ include file="layouts/footer.jsp" %>

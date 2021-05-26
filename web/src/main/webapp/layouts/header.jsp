@@ -25,10 +25,21 @@
 
         .header > ul.nav, .header > ul.nav > li, .header > ul.nav > li > a {
             height: 50px;
+            color: #777;
         }
 
         .header > ul.nav > li > a {
             line-height: 30px;
+        }
+
+        ul.nav-pills > li.active > a,
+        ul.nav-pills > li.active > a:hover,
+        ul.nav-pills > li.active > a:focus,
+        ul.nav-pills > li > a:hover,
+        ul.nav-pills > li > a:focus {
+            text-decoration: none;
+            background-color: #eee;
+            color: #000000;
         }
 
         #content, .header > ul.nav {
@@ -65,8 +76,12 @@
         menus.add(new Menu("/web/download", "文件下载"));
         menus.add(new Menu("/web/cookie", "Cookie"));
         menus.add(new Menu("/web/cookie.jsp", "查看Cookie"));
-        menus.add(new Menu("/web/session.jsp", "查看Session"));
-        menus.add(new Menu("/web/admin/index.jsp", "管理员信息"));
+
+        // 需要判断登录验证
+        if (request.getSession().getAttribute("username") != null) {
+            menus.add(new Menu("/web/admin/session.jsp", "Session"));
+            menus.add(new Menu("/web/admin/index.jsp", "管理员信息"));
+        }
 
         // servlet
         List<Menu> servlet = new ArrayList<>();
@@ -93,7 +108,8 @@
             </ul>
         </li>
         <% for (Menu m : menus) { %>
-        <li><a href="<%=m.url%>"><%=m.name%>
+        <li <%=m.url.equals(new String(request.getRequestURI())) ? "class='active'" : ""%>><a
+                href="<%=m.url%>"><%=m.name%>
         </a></li>
         <% } %>
     </ul>

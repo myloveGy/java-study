@@ -3,10 +3,13 @@
 <%@ include file="../layouts/header.jsp" %>
 <div id="content">
     <table class="table table-bordered table-hover">
+        <thead>
         <tr>
             <th>Name</th>
             <th>Value</th>
         </tr>
+        </thead>
+        <tbody>
         <%
             HttpSession session1 = request.getSession();
             Enumeration<String> attributeNames = session1.getAttributeNames();
@@ -24,7 +27,7 @@
         <%
             }
         %>
-
+        </tbody>
     </table>
 </div>
 <%@ include file="../layouts/footer.jsp" %>
