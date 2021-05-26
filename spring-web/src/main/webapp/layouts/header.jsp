@@ -17,6 +17,8 @@
     <title>Java Study Spring Web MVC</title>
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/bootstrap.min.css"
           crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="${ pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
     <style>
         .header {
             background-color: #f8f8f8;
