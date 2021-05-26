@@ -15,6 +15,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Java Study Spring Web MVC</title>
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/bootstrap.min.css"
+          crossorigin="anonymous">
     <style>
         .header {
             background-color: #f8f8f8;
@@ -32,6 +34,10 @@
             line-height: 30px;
         }
 
+        .nav-pills > li > a {
+            border-radius: 0;
+        }
+
         ul.nav-pills > li.active > a,
         ul.nav-pills > li.active > a:hover,
         ul.nav-pills > li.active > a:focus,
@@ -40,6 +46,10 @@
             text-decoration: none;
             background-color: #eee;
             color: #000000;
+        }
+
+        ul.nav-pills > li + li {
+            margin-left: 0px !important;
         }
 
         #content, .header > ul.nav {
@@ -51,8 +61,6 @@
             margin-top: 24px;
         }
     </style>
-    <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/bootstrap.min.css"
-          crossorigin="anonymous">
 </head>
 <body>
 <div class="header">
@@ -70,6 +78,8 @@
 
         List<Menu> menus = new ArrayList<>();
         menus.add(new Menu(request.getContextPath() + "/", "首页"));
+        menus.add(new Menu(request.getContextPath() + "/user-servlet", "user servlet"));
+        menus.add(new Menu(request.getContextPath() + "/success.jsp", "成功页"));
     %>
     <ul class="nav nav-pills">
         <% for (Menu m : menus) { %>
