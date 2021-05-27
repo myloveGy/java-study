@@ -1,6 +1,8 @@
 package com.study.my.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class BookUser {
     private Integer id;
@@ -9,14 +11,14 @@ public class BookUser {
     private String email;
     private Integer status;
     private Date createdAt;
-    private Date updated_at;
+    private Date updatedAt;
 
-    public Date getUpdated_at() {
-        return updated_at;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Date updated_at) {
+        this.updatedAt = updated_at;
     }
 
     public Integer getId() {
@@ -69,13 +71,15 @@ public class BookUser {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return "BookUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", status=" + status +
-                ", createdAt=" + createdAt +
+                ", createdAt=" + (createdAt != null ? format.format(createdAt) : "null") +
+                ", updatedAt=" + (updatedAt != null ? format.format(updatedAt) : "null") +
                 '}';
     }
 }

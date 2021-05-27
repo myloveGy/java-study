@@ -39,11 +39,12 @@ public class MyBatisTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         BookUser bookUser = new BookUser();
-        bookUser.setUsername("jinxing.liu@qq.com");
+        bookUser.setUsername("jinxing.liu@gmail.com");
         bookUser.setEmail("jinxing.liu@qq.com");
         bookUser.setPassword("123456");
         bookUser.setStatus(1);
         bookUser.setCreatedAt(new Date());
+        bookUser.setUpdatedAt(new Date());
         int insert = sqlSession.insert("userMapper.insert", bookUser);
         sqlSession.commit();
 
@@ -60,6 +61,7 @@ public class MyBatisTest {
         bookUser.setUsername("jinxing-test");
         bookUser.setPassword("456789");
         bookUser.setId(5);
+        bookUser.setUpdatedAt(new Date());
         int insert = sqlSession.update("userMapper.update", bookUser);
         sqlSession.commit();
 

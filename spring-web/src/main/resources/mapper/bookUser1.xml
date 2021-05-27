@@ -30,6 +30,7 @@
     <!--数据格式转换-->
     <resultMap id="user" type="com.study.my.domain.BookUser">
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="BIGINT"/>
     </resultMap>
     <parameterMap id="parameterMap" type="com.study.my.domain.BookUser">
         <parameter property="createdAt" jdbcType="TIMESTAMP"/>

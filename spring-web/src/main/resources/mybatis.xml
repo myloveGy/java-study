@@ -4,7 +4,7 @@
     
     <!--    注册自定义类型转换器-->
     <typeHandlers>
-        <typeHandler handler="com.study.my.handle.DateTypeHandler"/>
+        <typeHandler handler="com.study.my.handle.DateTypeHandler" jdbcType="BIGINT" javaType="java.util.Date"/>
     </typeHandlers>
     
     <environments default="development">

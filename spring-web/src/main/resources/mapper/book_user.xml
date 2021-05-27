@@ -5,15 +5,16 @@
 <mapper namespace="userMapper">
     <!--插入数据-->
     <insert id="insert" parameterType="com.study.my.domain.BookUser">
-        INSERT INTO `book_user` (`username`, `password`, `email`, `status`, `created_at`)
-        VALUES (#{username}, #{password}, #{email}, #{status}, #{createdAt,jdbcType=TIMESTAMP})
+        INSERT INTO `book_user` (`username`, `password`, `email`, `status`, `created_at`, `updated_at`)
+        VALUES (#{username}, #{password}, #{email}, #{status}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=BIGINT})
     </insert>
     
     <!--修改语句-->
     <update id="update" parameterType="com.study.my.domain.BookUser">
         UPDATE `book_user`
         SET `username` = #{username},
-            `password` = #{password}
+            `password` = #{password},
+            `updated_at` = #{updatedAt,jdbcType=BIGINT}
         WHERE `id` = #{id}
     </update>
     
@@ -38,6 +39,7 @@
     <!--数据格式转换-->
     <resultMap id="user" type="com.study.my.domain.BookUser">
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="BIGINT"/>
     </resultMap>
     <parameterMap id="parameterMap" type="com.study.my.domain.BookUser">
         <parameter property="createdAt" jdbcType="TIMESTAMP"/>
