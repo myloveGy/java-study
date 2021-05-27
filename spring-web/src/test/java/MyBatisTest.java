@@ -39,4 +39,32 @@ public class MyBatisTest {
         // 执行SQL语句
         System.out.println(insert);
     }
+
+    @Test
+    public void update() throws Exception {
+        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        BookUser bookUser = new BookUser();
+        bookUser.setUsername("jinxing-test");
+        bookUser.setPassword("456789");
+        bookUser.setId(5);
+        int insert = sqlSession.update("userMapper.update", bookUser);
+        sqlSession.commit();
+
+        // 执行SQL语句
+        System.out.println(insert);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        int insert = sqlSession.delete("userMapper.delete", 1);
+        sqlSession.commit();
+
+        // 执行SQL语句
+        System.out.println(insert);
+    }
 }

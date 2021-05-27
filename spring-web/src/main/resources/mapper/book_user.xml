@@ -9,11 +9,29 @@
         VALUES (#{username}, #{password}, #{email}, #{status}, #{createdAt,jdbcType=TIMESTAMP})
     </insert>
     
+    <!--修改语句-->
+    <update id="update" parameterType="com.study.my.domain.BookUser">
+        UPDATE `book_user`
+        SET `username` = #{username},
+            `password` = #{password}
+        WHERE `id` = #{id}
+    </update>
+    
+    <!--删除操作-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE
+        FROM `book_user`
+        WHERE `id` = #{id}
+    </delete>
+    
     <!--查询操作-->
     <select id="findAll" resultType="com.study.my.domain.BookUser" resultMap="user">
         SELECT *
         FROM book_user
     </select>
+    
+    
+    <!--数据格式转换-->
     <resultMap id="user" type="com.study.my.domain.BookUser">
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
     </resultMap>
