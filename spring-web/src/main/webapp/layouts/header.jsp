@@ -17,8 +17,12 @@
     <title>Java Study Spring Web MVC</title>
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/bootstrap.min.css"
           crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/nprogress/nprogress.css"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="${ pageContext.request.contextPath }/assets/js/bootstrap.min.js"></script>
+    <script src="${ pageContext.request.contextPath }/assets/nprogress/nprogress.js"></script>
     <style>
         .header {
             background-color: #f8f8f8;
@@ -63,6 +67,32 @@
             margin-top: 24px;
         }
     </style>
+    <script>
+        (function () {
+            document.onreadystatechange = function () {
+                NProgress.start();
+                if (document.readyState === "Uninitialized") {
+                    NProgress.set(1);
+                }
+                if (document.readyState === "Interactive") {
+                    NProgress.set(0.5);
+                }
+                if (document.readyState === "complete") {
+                    NProgress.done();
+                }
+            }
+        })();
+
+        // 设置ajax
+        $.ajaxSetup({
+            beforeSend: function () {
+                NProgress.start();
+            },
+            complete: function () {
+                NProgress.done();
+            }
+        });
+    </script>
 </head>
 <body>
 <div class="header">
@@ -81,6 +111,7 @@
         List<Menu> menus = new ArrayList<>();
         menus.add(new Menu(request.getContextPath() + "/", "首页"));
         menus.add(new Menu(request.getContextPath() + "/user-servlet", "user servlet"));
+        menus.add(new Menu(request.getContextPath() + "/restful.jsp", "动态路由"));
         menus.add(new Menu(request.getContextPath() + "/success.jsp", "成功页"));
     %>
     <ul class="nav nav-pills">

@@ -15,6 +15,12 @@ import java.util.Map;
 @Controller
 public class RequestController {
 
+    /**
+     * 请求参数解析到变量
+     * @param name 名称
+     * @param age 年龄
+     * @return 响应JSON
+     */
     @RequestMapping("/request")
     @ResponseBody
     public Object request(String name, int age) {
@@ -26,6 +32,11 @@ public class RequestController {
         return list;
     }
 
+    /**
+     * 请求参数解析到对象
+     * @param user 解析对象
+     * @return 响应JSON
+     */
     @RequestMapping("/request1")
     @ResponseBody
     public Object request1(User user) {
@@ -36,6 +47,11 @@ public class RequestController {
         return map;
     }
 
+    /**
+     * 解析List<>请求参数
+     * @param vo 请求参数
+     * @return 响应JSON
+     */
     @RequestMapping("/request2")
     @ResponseBody
     public Object request2(VO vo) {
@@ -46,6 +62,12 @@ public class RequestController {
         return map;
     }
 
+    /**
+     * 请求参数 @RequestParam 使用注解
+     * @param name 名称
+     * @param email 邮箱
+     * @return 响应JSON
+     */
     @RequestMapping("/request3")
     @ResponseBody
     public Object request3(
