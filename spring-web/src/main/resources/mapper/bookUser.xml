@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.my.dao.BookUserMapper">
+    <!--查询操作-->
+    <select id="findAll" resultType="com.study.my.domain.BookUser" resultMap="user">
+        SELECT *
+        FROM book_user
+    </select>
+    
+    <select id="findOne" resultType="com.study.my.domain.BookUser" parameterType="int" resultMap="user">
+        SELECT * FROM `book_user` LIMIT 1
+    </select>
+    
+    <select id="findById" resultType="com.study.my.domain.BookUser" parameterType="int" resultMap="user">
+        SELECT * FROM `book_user` WHERE `id` = #{id}
+    </select>
+    
+    <!--数据格式转换-->
+    <resultMap id="user" type="com.study.my.domain.BookUser">
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <parameterMap id="parameterMap" type="com.study.my.domain.BookUser">
+        <parameter property="createdAt" jdbcType="TIMESTAMP"/>
+    </parameterMap>
+</mapper>
