@@ -1,6 +1,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="jdbc.properties"/>
+    
+    <!--    注册自定义类型转换器-->
+    <typeHandlers>
+        <typeHandler handler="com.study.my.handle.DateTypeHandler"/>
+    </typeHandlers>
+    
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -12,6 +18,7 @@
             </dataSource>
         </environment>
     </environments>
+    
     
     <mappers>
         <mapper resource="mapper/book_user.xml"/>
