@@ -16,8 +16,20 @@
     <!--    </bean>-->
     
     <!--mvc驱动-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
     
     <!--开发资源访问-->
-    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <!--<mvc:resources mapping="/assets/**" location="/assets/"/>-->
+    
+    <!--mapping解析不到，交给tomcat处理-->
+    <mvc:default-servlet-handler/>
+    
+    <!--配置自定义转换器-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.study.my.converter.DateConverter"/>
+            </list>
+        </property>
+    </bean>
 </beans>
