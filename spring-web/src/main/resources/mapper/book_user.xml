@@ -18,7 +18,7 @@
     </update>
     
     <!--删除操作-->
-    <delete id="delete" parameterType="java.lang.Integer">
+    <delete id="delete" parameterType="int">
         DELETE
         FROM `book_user`
         WHERE `id` = #{id}
@@ -28,6 +28,10 @@
     <select id="findAll" resultType="com.study.my.domain.BookUser" resultMap="user">
         SELECT *
         FROM book_user
+    </select>
+    
+    <select id="findOne" resultType="com.study.my.domain.BookUser" parameterType="int" resultMap="user">
+        SELECT * FROM `book_user` WHERE `id` = #{id}
     </select>
     
     

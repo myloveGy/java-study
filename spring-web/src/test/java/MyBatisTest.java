@@ -12,6 +12,17 @@ import java.util.List;
 public class MyBatisTest {
 
     @Test
+    public void findOne() throws Exception {
+        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 执行SQL语句
+        BookUser user = sqlSession.selectOne("userMapper.findOne", 5);
+        System.out.println(user);
+        sqlSession.close();
+    }
+
+    @Test
     public void findAll() throws Exception {
         InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -61,7 +72,7 @@ public class MyBatisTest {
         InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        int insert = sqlSession.delete("userMapper.delete", 1);
+        int insert = sqlSession.delete("userMapper.delete", 3);
         sqlSession.commit();
 
         // 执行SQL语句
