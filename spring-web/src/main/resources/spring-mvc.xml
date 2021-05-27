@@ -42,7 +42,18 @@
     
     <!--配置文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="UTF-8" />
+        <property name="defaultEncoding" value="UTF-8"/>
         <property name="maxUploadSize" value="500000"/>
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!--默认视图-->
+        <property name="defaultErrorView" value="error.jsp"/>
+        <property name="exceptionMappings">
+            <!--异常类型-->
+            <map>
+                <entry key="java.lang.ClassCastException" value="error.jsp"/>
+            </map>
+        </property>
     </bean>
 </beans>
