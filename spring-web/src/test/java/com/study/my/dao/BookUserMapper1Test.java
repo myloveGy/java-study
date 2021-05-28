@@ -1,5 +1,6 @@
 package com.study.my.dao;
 
+import com.github.pagehelper.PageHelper;
 import com.study.my.domain.BookUser;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -41,5 +42,21 @@ public class BookUserMapper1Test {
         list.add(5);
         List<BookUser> listUser = bookUserMapper1.findByIds(list);
         System.out.println(listUser);
+    }
+
+    @Test
+    public void findAll() throws IOException {
+        System.out.println("jinxing.liu");
+        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        PageHelper.startPage(1, 10);
+        BookUserMapper1 bookUserMapper1 = sqlSession.getMapper(BookUserMapper1.class);
+        List<BookUser> listUser = bookUserMapper1.findAll();
+        for (BookUser user: listUser) {
+            System.out.println(user);
+        }
+        sqlSession.close();
     }
 }

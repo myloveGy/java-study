@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.my.dao.BookUserMapper1">
     <!--查询操作-->
-    <select id="findByCondition" parameterType="com.study.my.domain.BookUser" resultType="com.study.my.domain.BookUser" resultMap="user">
+    <select id="findByCondition" parameterType="com.study.my.domain.BookUser" resultType="com.study.my.domain.BookUser"
+            resultMap="user">
         SELECT *
         FROM `book_user`
         <where>
@@ -17,6 +18,7 @@
         </where>
     </select>
     
+    <!--通过ID查询-->
     <select id="findByIds" parameterType="list" resultType="com.study.my.domain.BookUser" resultMap="user">
         SELECT * FROM `book_user`
         <where>
@@ -24,7 +26,12 @@
                 #{id}
             </foreach>
         </where>
-        
+    
+    </select>
+    
+    <select id="findAll" resultType="com.study.my.domain.BookUser" resultMap="user">
+        SELECT *
+        FROM `book_user`
     </select>
     
     <!--数据格式转换-->
