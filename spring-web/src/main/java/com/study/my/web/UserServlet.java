@@ -1,6 +1,5 @@
 package com.study.my.web;
 
-import com.study.my.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -25,7 +24,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-        UserService userService = app.getBean(UserService.class);
-        userService.save();
+//        UserService userService = app.getBean(UserService.class);
+//        userService.save();
     }
 }

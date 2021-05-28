@@ -114,6 +114,7 @@
         menus.add(new Menu(request.getContextPath() + "/restful.jsp", "动态路由"));
         menus.add(new Menu(request.getContextPath() + "/upload.jsp", "文件上传"));
         menus.add(new Menu(request.getContextPath() + "/success.jsp", "成功页"));
+        menus.add(new Menu(request.getContextPath() + "/user/list", "用户列表"));
     %>
     <ul class="nav nav-pills">
         <% for (Menu m : menus) { %>

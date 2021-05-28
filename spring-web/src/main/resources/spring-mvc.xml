@@ -46,14 +46,14 @@
         <property name="maxUploadSize" value="500000"/>
     </bean>
     
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!--默认视图-->
-        <property name="defaultErrorView" value="error.jsp"/>
-        <property name="exceptionMappings">
-            <!--异常类型-->
-            <map>
-                <entry key="java.lang.ClassCastException" value="error.jsp"/>
-            </map>
-        </property>
-    </bean>
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+    <!--        &lt;!&ndash;默认视图&ndash;&gt;-->
+    <!--        <property name="defaultErrorView" value="error.jsp"/>-->
+    <!--        <property name="exceptionMappings">-->
+    <!--            &lt;!&ndash;异常类型&ndash;&gt;-->
+    <!--            <map>-->
+    <!--                <entry key="java.lang.ClassCastException" value="error.jsp"/>-->
+    <!--            </map>-->
+    <!--        </property>-->
+    <!--    </bean>-->
 </beans>
