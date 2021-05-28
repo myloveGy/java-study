@@ -6,6 +6,7 @@
     <typeAliases>
         <typeAlias type="org.example.domain.User" alias="user"/>
         <typeAlias type="org.example.domain.Order" alias="order"/>
+        <typeAlias type="org.example.domain.Role" alias="role"/>
     </typeAliases>
     
     <!--配置分页助手-->
@@ -24,5 +25,6 @@
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/OrderMapper.xml"/>
+        <mapper resource="mapper/RoleMapper.xml"/>
     </mappers>
 </configuration>

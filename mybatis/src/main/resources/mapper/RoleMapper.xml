@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.RoleMapper">
+    <!--字段替换-->
+    <resultMap id="role" type="role">
+        <id column="role_id" property="roleId"/>
+        <id column="role_name" property="roleName"/>
+        <id column="description" property="description"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+    
+    <!--查询多条数据-->
+    <select id="findAll" resultType="role" resultMap="role" parameterType="role">
+        SELECT *
+        FROM `mybatis_role`
+        <where>
+            <if test="roleId != null">
+                AND `role_id` = #{roleId}
+            </if>
+            <if test="roleName != null">
+                AND `role_name` like #{roleName}
+            </if>
+        </where>
+    </select>
+    
+    <!--查询单条数据-->
+    <select id="findOne" parameterType="integer" resultType="role" resultMap="role">
+        SELECT *
+        FROM `mybatis_role`
+        WHERE `role_id` = #{roleId}
+    </select>
+</mapper>
