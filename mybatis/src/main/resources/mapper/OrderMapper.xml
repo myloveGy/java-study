@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.OrderMapper">
+    <!--字段替换-->
+    <resultMap id="order" type="order">
+        <id column="order_id" property="orderId"/>
+        <id column="order_sn" property="orderSn"/>
+        <id column="user_id" property="userId"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+    
+    <!--查询多条数据-->
+    <select id="findAll" resultType="order" resultMap="order">
+        SELECT *
+        FROM `mybatis_order`
+    </select>
+    
+    <!--查询单条数据-->
+    <select id="findOne" parameterType="integer" resultType="order" resultMap="order">
+        SELECT *
+        FROM `mybatis_order`
+        WHERE `order_id` = #{orderId}
+    </select>
+    
+    <!--关联定义-->
+    <resultMap id="orderUser" type="order">
+        <id column="order_id" property="orderId"/>
+        <result column="order_sn" property="orderSn"/>
+        <result column="user_id" property="userId"/>
+        <result column="amount" property="amount"/>
+        <result column="order_created_at" property="createdAt"/>
+        <result column="order_updated_at" property="updatedAt"/>
+        
+        <association property="user" javaType="user">
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="user_created_at" property="createdAt"/>
+            <result column="user_updated_at" property="updatedAt"/>
+        </association>
+    </resultMap>
+    
+    <!--查询单条数据并绑定订单信息-->
+    <select id="findUserById" parameterType="integer" resultMap="orderUser">
+        SELECT *, `mybatis_user`.`created_at` AS `user_created_at`, `mybatis_user`.`updated_at` AS `user_updated_at`,
+               `mybatis_order`.`created_at` AS `order_created_at`, `mybatis_order`.`updated_at` AS `order_updated_at`
+        FROM `mybatis_order`,
+             `mybatis_user`
+        WHERE `mybatis_order`.`user_id` = `mybatis_user`.`user_id` AND `mybatis_order`.`order_id` = #{orderId}
+    </select>
+</mapper>
