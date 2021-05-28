@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,20 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
 
+    // 订单信息
+    private List<Order> orders;
+
+    // 角色信息
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }
@@ -18,8 +33,6 @@ public class User {
         this.orders = orders;
     }
 
-    // 订单信息
-    private List<Order> orders;
 
     public Integer getUserId() {
         return userId;
@@ -63,12 +76,14 @@ public class User {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", createdAt=" + format.format(createdAt) +
+                ", updatedAt=" + format.format(updatedAt) +
                 '}';
     }
 }

@@ -10,4 +10,7 @@ public interface RoleMapper {
 
     // 查询单条数据
     Role findOne(Integer roleId);
+
+    // 查询通过用户ID
+    Role findByUserId(Integer userId);
 }

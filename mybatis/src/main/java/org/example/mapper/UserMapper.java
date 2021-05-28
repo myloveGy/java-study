@@ -13,4 +13,9 @@ public interface UserMapper {
 
     // 查询多个并且带订单信息
     List<User> findOrderByUserId(Integer userId);
+
+    // 查询多个并且带角色信息
+    List<User> findRoleByUserId(Integer userId);
+
+    Integer insert(User user);
 }

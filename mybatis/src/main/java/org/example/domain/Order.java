@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Order {
@@ -21,8 +22,6 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
-
-
 
 
     public Integer getOrderId() {
@@ -75,13 +74,16 @@ public class Order {
 
     @Override
     public String toString() {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         return "Order{" +
                 "orderId=" + orderId +
                 ", orderSn='" + orderSn + '\'' +
                 ", userId=" + userId +
                 ", amount=" + amount +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", createdAt=" + format.format(createdAt) +
+                ", updatedAt=" + format.format(updatedAt) +
                 '}';
     }
 }

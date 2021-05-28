@@ -22,9 +22,12 @@
         </environment>
     </environments>
     
+    <!--加载隐射关系-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/OrderMapper.xml"/>
         <mapper resource="mapper/RoleMapper.xml"/>
+        <mapper class="org.example.mapper.User1Mapper"/>
+        <mapper class="org.example.mapper.Order1Mapper"/>
     </mappers>
 </configuration>

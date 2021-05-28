@@ -42,10 +42,51 @@
     
     <!--查询单条数据并绑定订单信息-->
     <select id="findOrderByUserId" parameterType="integer" resultMap="userOrder">
-        SELECT *, `mybatis_user`.`created_at` AS `user_created_at`, `mybatis_user`.`updated_at` AS `user_updated_at`,
-               `mybatis_order`.`created_at` AS `order_created_at`, `mybatis_order`.`updated_at` AS `order_updated_at`
+        SELECT *,
+               `mybatis_user`.`created_at`  AS `user_created_at`,
+               `mybatis_user`.`updated_at`  AS `user_updated_at`,
+               `mybatis_order`.`created_at` AS `order_created_at`,
+               `mybatis_order`.`updated_at` AS `order_updated_at`
         FROM `mybatis_user`,
              `mybatis_order`
-        WHERE `mybatis_order`.`user_id` = `mybatis_user`.`user_id` AND `mybatis_user`.`user_id` = #{userId}
+        WHERE `mybatis_order`.`user_id` = `mybatis_user`.`user_id`
+          AND `mybatis_user`.`user_id` = #{userId}
     </select>
+    
+    <!--关联定义-->
+    <resultMap id="userRole" type="user">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="user_created_at" property="createdAt"/>
+        <result column="user_updated_at" property="updatedAt"/>
+        <collection property="roles" ofType="role">
+            <id column="role_id" property="roleId"/>
+            <result column="role_name" property="roleName"/>
+            <result column="description" property="description"/>
+            <result column="role_created_at" property="createdAt"/>
+            <result column="role_updated_at" property="updatedAt"/>
+        </collection>
+    </resultMap>
+    
+    <!--查询单条数据并绑定订单信息-->
+    <select id="findRoleByUserId" parameterType="integer" resultMap="userRole">
+        SELECT `mybatis_user`.*,
+               `mybatis_role`.*,
+               `mybatis_user`.`created_at` AS `user_created_at`,
+               `mybatis_user`.`updated_at` AS `user_updated_at`,
+               `mybatis_role`.`created_at` AS `role_created_at`,
+               `mybatis_role`.`updated_at` AS `role_updated_at`
+        FROM `mybatis_user`,
+             `mybatis_user_role`,
+             `mybatis_role`
+        WHERE `mybatis_user_role`.`user_id` = `mybatis_user`.`user_id`
+          AND `mybatis_role`.`role_id` = `mybatis_user_role`.`role_id`
+          AND `mybatis_user`.`user_id` = #{userId}
+    </select>
+    
+    <!--新增数据-->
+    <insert id="insert" parameterType="user">
+        INSERT INTO `mybatis_user` (`username`, `password`, `created_at`, `updated_at`) VALUES (#{username}, #{password}, #{createdAt}, #{updatedAt})
+    </insert>
 </mapper>

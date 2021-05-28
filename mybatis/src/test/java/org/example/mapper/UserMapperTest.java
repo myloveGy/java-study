@@ -10,9 +10,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserMapperTest {
 
@@ -22,7 +23,7 @@ public class UserMapperTest {
     public void before() throws IOException {
         InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
         userMapper = sqlSession.getMapper(UserMapper.class);
     }
 
@@ -42,9 +43,30 @@ public class UserMapperTest {
     @Test
     public void findOrderByUserId() {
         List<User> one = userMapper.findOrderByUserId(1);
-        for (User user: one) {
+        for (User user : one) {
             System.out.println(user);
             System.out.println(user.getOrders());
         }
+    }
+
+    @Test
+    public void findRoleByUserId() {
+        List<User> list = userMapper.findRoleByUserId(1);
+        for (User user : list) {
+            System.out.println(user);
+            System.out.println(user.getRoles());
+        }
+    }
+
+    @Test
+    public void insert() {
+        User user = new User();
+        user.setUsername("test123");
+        user.setPassword("jinxing.liu");
+        user.setCreatedAt(new Date());
+        user.setUpdatedAt(new Date());
+        Integer insert = userMapper.insert(user);
+        System.out.println(insert);
+
     }
 }

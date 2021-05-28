@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Role {
@@ -51,12 +52,13 @@ public class Role {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return "Role{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
                 ", description='" + description + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", createdAt=" + format.format(createdAt) +
+                ", updatedAt=" + format.format(updatedAt) +
                 '}';
     }
 }

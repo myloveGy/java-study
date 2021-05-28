@@ -32,4 +32,11 @@
         FROM `mybatis_role`
         WHERE `role_id` = #{roleId}
     </select>
+    
+    <select id="findByUserId" parameterType="integer" resultType="role" resultMap="role">
+        SELECT `mybatis_role`.*
+        FROM `mybatis_role`
+                 INNER JOIN `mybatis_user_role` ON (`mybatis_user_role`.`role_id` = `mybatis_role`.`role_id`)
+        WHERE `mybatis_user_role`.`user_id` = #{userId}
+    </select>
 </mapper>
