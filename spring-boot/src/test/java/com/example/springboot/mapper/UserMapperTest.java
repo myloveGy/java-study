@@ -20,8 +20,8 @@ class UserMapperTest {
     @Test
     void insert() {
         User user = new User();
-        user.setUsername("spring-boot-test");
-        user.setPassword("spring-boot-test");
+        user.setUsername("spring-boot-test2");
+        user.setPassword("spring-boot-test2");
         user.setCreatedAt(new Date());
         user.setUpdatedAt(new Date());
         userService.saveUser(user);
