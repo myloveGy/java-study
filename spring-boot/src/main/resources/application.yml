@@ -1,0 +1,29 @@
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/java-study
+  username: root
+  password: 123456
+
+# spring 的配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/java-study?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+# mybatis配置
+mybatis:
+  # 实体类别名包路径
+  type-aliases-package: com.exemple.springboot.pojo
+  # 映射文件
+  # mapper-locations: classpath:mappers/*.xml
+  configuration:
+    # 控制台输出sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#日志信息
+logging:
+  level:
+    com.example.springboot: debug
+    org.springframework: info
