@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class ConnectionUtil {
-
+    
     /**
      * 获取rabbitmq连接
      *
@@ -33,5 +33,5 @@ public class ConnectionUtil {
         // 创建连接
         return connectionFactory.newConnection();
     }
-}
 
+}
