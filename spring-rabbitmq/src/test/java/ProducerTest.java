@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:application-producer.xml")
 public class ProducerTest {
@@ -14,7 +17,8 @@ public class ProducerTest {
 
     @Test
     public void queueTest() {
-        rabbitTemplate.convertAndSend("spring_queue", "我的测试数据");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        rabbitTemplate.convertAndSend("spring_queue", "{\"data\": 1, \"user_id\": 120, \"time\": \"" + format.format(new Date()) + "\"}");
     }
 
     @Test
@@ -29,7 +33,7 @@ public class ProducerTest {
      * 绑定到该交换机的匹配队列能够收到对应消息
      */
     @Test
-    public void topicTest(){
+    public void topicTest() {
         /**
          * 参数1：交换机名称
          * 参数2：路由键名
